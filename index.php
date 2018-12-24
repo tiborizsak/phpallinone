@@ -6,13 +6,6 @@
         <title></title>
     </head>
     <body>
-        <form action="jelszoell2.0.php" method="get">
-            Ide írd a jelszót:<input type="text" name="jelszo">
-            (a jelszónak tartalmazni kell a magyar ábécé betűíből 2 kisbetűt 2 nagybetűt és 2 nem alfanumerikus karaktert)
-            <br>
-            <input type="submit">
-        </form>
-        <br><br>
         <?php
         
         function benneVan($miben, $mi) {
@@ -24,10 +17,8 @@
                 $mire = array("a", "e", "i", "o", "o", "o", "u", "u", "u", "A", "E", "I", "O", "O", "O", "U", "U", "U");
                 $jelszo = str_replace($mit, $mire, $jelszo);
                 
-//                define("KB", "abcdefghijklmnopqrstuvwxyz");
-//                $KB = array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y");
-                $KB = "abcdefghijklmnopqrstuvwxyz";
-                define("NB", strtoupper($KB));
+                define("KB", "abcdefghijklmnopqrstuvwxyz");
+                define("NB", strtoupper(KB));
                 define("SZ", "0123456789");
                 define("IJ", "+-!?.,:;()[]{}=<>*/\"'\\\$");
 
@@ -37,7 +28,7 @@
                 $ijdb = 0;
                 
                 for ($i = 0; $i < strlen($jelszo); $i++) {
-                    if (benneVan($KB, $jelszo[$i])) { // kisbetű
+                    if (benneVan(KB, $jelszo[$i])) { // kisbetű
                         $kbdb++;
                     } else
                     if (benneVan(NB, $jelszo[$i])) { // nagybetű
@@ -52,25 +43,11 @@
                 }
                 
                 return $kbdb >= $minkbdb && $nbdb >= $minnbdb && $szdb >= $minszdb && $ijdb >= $minijdb;
-               
             }
 
-            $password = filter_input(INPUT_GET, "jelszo");
-            
-            echo var_dump(jelszoellenorzes($password, 2, 2, 2, 2)); //itt hívom meg először
-            
-            $jelszeredmeny = jelszoellenorzes($password, 2, 2, 2, 2);//itt hívom meg másodszor
-            
-            function jelszouzenet($eredmeny){
-                if ($eredmeny === FALSE){
-                    echo "ezt elrontottad";
-                } else 
-                    if ($eredmeny === TRUE){
-                        echo "szerencsed volt";
-                    }
-            }
-            
-            echo jelszouzenet($jelszeredmeny);
+            $jelszo = "!ÖregNéne2018!";
+            echo jelszoellenorzes($jelszo, 2, 2, 2, 2);
+        
         ?>
     </body>
 </html>
